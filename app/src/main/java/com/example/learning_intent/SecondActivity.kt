@@ -37,20 +37,47 @@ fun SecondActivityScreen(modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         Text("Second Activity")
+
         Spacer(modifier = Modifier.height(20.dp))
-        Button(onClick = {
-            try {
-                context.startActivity(
-                    Intent(Intent.ACTION_MAIN).apply {
-                        setPackage("com.google.android.youtube")
-                    }
-                )
-            } catch (e: Exception) {
-                Toast.makeText(context, "YouTube is not installed", Toast.LENGTH_SHORT).show()
+
+        Button(
+            onClick = {
+                try {
+                    context.startActivity(
+                        Intent(Intent.ACTION_MAIN).apply {
+                            setPackage("com.google.android.youtube")
+                        }
+                    )
+                } catch (e: Exception) {
+                    Toast.makeText(context, "YouTube is not installed", Toast.LENGTH_SHORT).show()
+                }
             }
-        }) { Text("Open YouTube") }
+        ) {
+            Text("Open YouTube")
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = {
+                try {
+                    context.startActivity(
+                        Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_EMAIL, arrayOf("test@test.com"))
+                            putExtra(Intent.EXTRA_SUBJECT, arrayOf("This is a subject"))
+                            putExtra(Intent.EXTRA_TEXT, arrayOf("This is the content of my email"))
+                        }
+                    )
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Failed to send email", Toast.LENGTH_SHORT).show()
+                }
+            }
+        ) {
+            Text("Send E-mail")
+        }
     }
 }

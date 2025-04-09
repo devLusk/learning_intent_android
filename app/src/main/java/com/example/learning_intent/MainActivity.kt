@@ -39,7 +39,7 @@ fun FirstScreen(modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         Text("First Activity")
 
@@ -48,11 +48,9 @@ fun FirstScreen(modifier: Modifier = Modifier) {
         Button(
             onClick = {
                 context.startActivity(
-                    Intent(context, SecondActivity::class.java).addFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK
-                    )
+                    Intent(context, SecondActivity::class.java)
                 )
-            },
+            }
         ) {
             Text("2st Activity")
         }
